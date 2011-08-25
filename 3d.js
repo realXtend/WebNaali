@@ -54,8 +54,8 @@ function initGraffa() {
     renderer.setScene(scene);
 
     camera = new GLGE.Camera();
-
     camera.setType(GLGE.C_PERSPECTIVE);
+    camera.setAspect(16/9.0);
 
     scene.setCamera(camera); 
     startRender()
