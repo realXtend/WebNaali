@@ -45,7 +45,7 @@ function Entity(id) {
 	    this.mesh = new GLGE.Collada();
 	    this.mesh.setId(this.parent);
 	    this.mesh.setDocument(this.url);
-	    this.mesh.docURL = "/";
+	    this.mesh.docURL = "avatar/";
 	    this.mesh.setScale(0.1);
 	    this.mesh.setRotY(3 * Math.PI / 2);
 	    scene.addCollada(this.mesh);
@@ -59,8 +59,7 @@ function Entity(id) {
 			break;
 		    }
 		}		
-	    }, 100);
-	    
+	    }, 10000);
 	}
     }
     
@@ -160,6 +159,15 @@ function setAttr(params) {
 			    // sync Camera
 			    camera.setLoc(x, y + 1.5, z);
 			    camera.setRot(rotx, rotz - Math.PI / 2, roty);
+
+                            //try to move it backwards for 3rd person view. parenting to av would be better, and probably easier too
+                            //var ox = camera.getLocX();
+                            //var oy = camera.getLocY();
+                            //var oz = camera.getLocZ();
+                            //var camrot = camera.getRotation();
+                            //camera.setLoc(ox + camrot.x, oy - camrot.y, oz - camrot.z);
+			    //that didn't work - resort to just hiding own av as a desperate fix
+	 	            collada.setScale(0.01);
 			}
 		    }
 		}
