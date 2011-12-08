@@ -38,11 +38,10 @@ function initGraffa() {
     renderer = new GLGE.Renderer(canvas);
     scene = new GLGE.Scene();
 
-
     // temp testing
     var static_scene = new GLGE.Collada();
     static_scene.setDocument(url_to_static);
-    static_scene.docURL = "/";
+    static_scene.docURL = asset_baseurl;
     static_scene.setRot(0, 0, 0);
     scene.addCollada(static_scene);
 
@@ -56,6 +55,20 @@ function initGraffa() {
     camera = new GLGE.Camera();
     camera.setType(GLGE.C_PERSPECTIVE);
     camera.setAspect(16/9.0);
+
+    // startloc and rot are used only in scenetest. in ws3dclient all
+    // location and rotation data comes from server (for now)
+    if (startloc) {
+	camera.setLocX(startloc.x);
+	camera.setLocY(startloc.y);
+	camera.setLocZ(startloc.z);
+    }
+
+    if (startrot) {
+	camera.setRotX(startrot.x);
+	camera.setRotY(startrot.y);
+	camera.setRotZ(startrot.z);
+    }
 
     scene.setCamera(camera); 
     startRender()

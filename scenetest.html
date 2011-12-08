@@ -72,7 +72,13 @@
 <script type="text/javascript">
 
 window.onload = function() {
-    url_to_static = "aula2_rmx.dae";
+    //url_to_static = "aula2_rmx.dae";
+    //url_to_static = "abc/abc_archi_draft_collada.dae";
+    url_to_static = "livingroom__day.dae";
+    asset_baseurl = "majbacka/";
+
+    startloc = {x: 2.79, y: 0.86, z: 9.76};
+    startrot = {x: 0, y: 7.2, z: 0};
 
     initGraffa();
 
@@ -87,7 +93,7 @@ window.onload = function() {
 <!-- <h1>WebGL scenetest</h1 -->
 
 <div id="container">
-  <canvas id="graffa" width="400" height="400"">
+  <canvas id="graffa" width="1350" height="900"">
     This text is displayed if your browser does not support HTML5 Canvas.
     </canvas>
     <div id="info">
