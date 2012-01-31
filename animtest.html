@@ -1,0 +1,121 @@
+<html> 
+<head> 
+<!--
+    scenetest.html - for loading and browsing a scene
+
+    scenetest loads a collada scene. 
+
+    You can "walk" in the scene using wasd and arrow keys,
+
+-->
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+<title>Scenetest</title> 
+
+<!-- GLGE stuff --> 
+<script type="text/javascript" src="glge/src/core/glge_math.js"></script>
+<script type="text/javascript" src="glge/src/core/glge.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_event.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_quicknote.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_animatable.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_document.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_placeable.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_jsonloader.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_group.js"></script>
+<script type="text/javascript" src="glge/src/core/glge_messages.js"></script>
+<script type="text/javascript" src="glge/src/animation/glge_action.js"></script>
+<script type="text/javascript" src="glge/src/animation/glge_actionchannel.js"></script>
+<script type="text/javascript" src="glge/src/animation/glge_animationcurve.js"></script>
+<script type="text/javascript" src="glge/src/animation/glge_animationvector.js"></script>
+<script type="text/javascript" src="glge/src/animation/glge_animationpoints.js"></script>
+<script type="text/javascript" src="glge/src/geometry/glge_mesh.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_material.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_materiallayer.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_multimaterial.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_texture.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_texturecamera.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_texturecanvas.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_texturecube.js"></script>
+<script type="text/javascript" src="glge/src/material/glge_texturevideo.js"></script>
+<script type="text/javascript" src="glge/src/renderable/glge_lod.js"></script>
+<script type="text/javascript" src="glge/src/renderable/glge_object.js"></script>
+<script type="text/javascript" src="glge/src/renderable/glge_text.js"></script>
+<script type="text/javascript" src="glge/src/renders/glge_renderer.js"></script>
+<script type="text/javascript" src="glge/src/scene/glge_camera.js"></script>
+<script type="text/javascript" src="glge/src/scene/glge_light.js"></script>
+<script type="text/javascript" src="glge/src/scene/glge_scene.js"></script>
+<script type="text/javascript" src="glge/src/extra/glge_particles.js"></script>
+<script type="text/javascript" src="glge/src/extra/glge_filter2d.js"></script>
+<script type="text/javascript" src="glge/src/extra/filters/glge_filter_glow.js"></script>
+<script type="text/javascript" src="glge/src/extra/filters/glge_filter_ao.js"></script>
+<script type="text/javascript" src="glge/src/extra/glge_collada.js"></script>
+<script type="text/javascript" src="glge/src/extra/glge_input.js"></script>
+<script type="text/javascript" src="glge/src/extra/glge_wavefront.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsext.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsabstract.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsbox.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsmesh.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsplane.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicssphere.js"></script>
+<script type="text/javascript" src="glge/src/physics/glge_physicsconstraintpoint.js"></script>
+
+<!-- jQuery -->
+<script type="text/javascript" src="jquery/jquery-1.6.1.js"></script>
+
+<script type="text/javascript" src="global.js"></script>
+<script type="text/javascript" src="3d.js"></script>
+<script type="text/javascript" src="entities.js"></script>
+
+<script type="text/javascript" src="scenetest.js"></script>
+
+<!-- code for demo stuff -->
+<script type="text/javascript">
+
+window.onload = function() {
+    //url_to_static = "aula2_rmx.dae";
+    //url_to_static = "abc/abc_archi_draft_collada.dae";
+    //url_to_static = "livingroom__day.dae";
+    url_to_static = "";
+    //asset_baseurl = "majbacka/";
+
+    startloc = {x: 2.79, y: 0.86, z: 9.76};
+    startrot = {x: 0, y: 7.2, z: 0};
+
+    initGraffa();
+
+    startRender();
+
+    var temp = new GLGE.Collada();
+    temp.setDocument("avatar/man_mesh+armature_2.5.dae");
+    var i = 6;
+    temp.setLoc(10 * (7- i), 0, 10 * (7 -i));
+    temp.docURL = "";
+    scene.addCollada(temp);
+    
+    camera.setLoc(15.52, 9.29, 44.86);
+    camera.setRot(0, 6.33, 0);
+};
+
+</script>
+
+</head>
+
+<body>
+<!-- <h1>WebGL scenetest</h1 -->
+
+<div id="container">
+  <canvas id="graffa" width="675" height="450"">
+    This text is displayed if your browser does not support HTML5 Canvas.
+    </canvas>
+    <div id="info">
+  </div>
+  <div id="fps"></div>
+  <div id="debug"></div>
+</div>
+<!--p id="buttons">
+Kek plop
+<button onclick='clearInterval(rendertimerid)'>Stop rendering</button>
+</p-->
+
+</body>
+</html>

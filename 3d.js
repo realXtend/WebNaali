@@ -40,10 +40,12 @@ function initGraffa() {
 
     // temp testing
     var static_scene = new GLGE.Collada();
-    static_scene.setDocument(url_to_static);
-    static_scene.docURL = asset_baseurl;
-    static_scene.setRot(0, 0, 0);
-    scene.addCollada(static_scene);
+    if (url_to_static != "") {
+        static_scene.setDocument(url_to_static);
+        static_scene.docURL = "/abc/";
+        static_scene.setRot(0, 0, 0);
+        scene.addCollada(static_scene);
+    }
 
     keys = new GLGE.KeyInput();
     mouse = new GLGE.MouseInput(canvas);
@@ -55,6 +57,10 @@ function initGraffa() {
     camera = new GLGE.Camera();
     camera.setType(GLGE.C_PERSPECTIVE);
     camera.setAspect(16/9.0);
+    camera.setLocX(2.790530635509013);
+    camera.setLocY(0.857142857142857);
+    camera.setLocZ(9.75832300189141);
+    camera.setRotY(7.200000000000014);
 
     // startloc and rot are used only in scenetest. in ws3dclient all
     // location and rotation data comes from server (for now)
