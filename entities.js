@@ -54,7 +54,7 @@ function Entity(id) {
 	    this.mesh.setDocument(this.url);
 	    //this.mesh.docURL = "avatar/";
 	    this.mesh.setScale(0.1);
-	    this.mesh.setRotY(3 * Math.PI / 2);
+	    //this.mesh.setRotY(3 * Math.PI / 2);
 	    scene.addCollada(this.mesh);
 	    // For some reason setting the animation frames is not
 	    //executed immidiately so we delay execution a bit
@@ -147,8 +147,8 @@ function setAttr(params) {
 		    if (collada.getId() == id) {
 			var transform = params['Transform'];
 			var x = transform[0];
-			var y = transform[2];
-			var z = -transform[1];
+			var y = transform[1];
+			var z = transform[2];
 			var rotx = transform[3] * Math.PI / 180;
 			var roty = transform[4] * Math.PI / 180;
 			var rotz = transform[5] * Math.PI / 180;
@@ -156,14 +156,14 @@ function setAttr(params) {
 			collada.setLocX(x);
 			collada.setLocY(y);
 			collada.setLocZ(z);
-			collada.setRotX(rotx + 3 * Math.PI / 2);
+			collada.setRotX(rotx);
     			collada.setRotY(roty);
-			collada.setRotZ(rotz - 3 * Math.PI / 2);
+			collada.setRotZ(rotz);
 
 			if (id == myid) {
 			    // sync Camera
 			    camera.setLoc(x, y + 1.5, z);
-			    camera.setRot(rotx, rotz - Math.PI / 2, roty);
+			    camera.setRot(rotx, roty, rotz);
 
                             //try to move it backwards for 3rd person view. parenting to av would be better, and probably easier too
                             //var ox = camera.getLocX();
