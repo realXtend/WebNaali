@@ -25,12 +25,19 @@ function Entity(id) {
     
     Components.EC_Mesh = function(params) {
 	this.componentName = 'EC_Mesh';
-
-	this.parent = params['id'];
-	
+	this.parent = params['id'];	
 	this.url = params['url']
-	//FIXME
+        this.url = "http://localhost:8000/man_mesh+armature_2.5.dae"; //XXX test override
 
+        /*if (this.url) {
+            this.mesh = new GLGE.Collada();
+            this.mesh.setId(this.parent);
+	    //FIXME -- now just copy-pasted EC_Avatar from below
+	    this.mesh.setDocument(this.url);
+	    this.mesh.setScale(0.1);
+	    this.mesh.setRotY(3 * Math.PI / 2);
+	    scene.addCollada(this.mesh);
+	}*/
     }
 
     Components.EC_Avatar = function(params) {
@@ -38,14 +45,14 @@ function Entity(id) {
 	var id = params['id'];
 	this.parent = id;
 
-	//this.url = "http://localhost:8000/man_mesh+armature_2.5.dae";
-        this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
+	this.url = "http://localhost:8000/man_mesh+armature_2.5.dae";
+        //this.url = "http://www.realxtend.org/webnaali/avatar/man_mesh%2Barmature_2.5.dae";
 
 	if (this.url) {
 	    this.mesh = new GLGE.Collada();
 	    this.mesh.setId(this.parent);
 	    this.mesh.setDocument(this.url);
-	    this.mesh.docURL = "avatar/";
+	    //this.mesh.docURL = "avatar/";
 	    this.mesh.setScale(0.1);
 	    this.mesh.setRotY(3 * Math.PI / 2);
 	    scene.addCollada(this.mesh);
@@ -92,9 +99,7 @@ function addComponent(params) {
     id = params['id']
 
     var newComponent = params['component'];
-
     var component;
-
 
     // WS does not have any fancy sync state stuff so if we get an
     // addcomponent message for an entity that hasn't been created yet
@@ -170,6 +175,9 @@ function setAttr(params) {
 	 	            collada.setScale(0.01);
 			}
 		    }
+                    else {
+                        //console.log('PLACEABLE for unknown entity: ' + id)
+                    }
 		}
 	    }
 	}
@@ -243,10 +251,12 @@ function loadScene(params) {
 			      component: component,
 			      transform: data[id][component]['Transform'].split(',')});
 	    }  else if (component == 'EC_Mesh') {
-	     	//console.log('MESH');
+                var meshref = data[id][component]['Mesh ref'];
+                console.log('MESH ' + meshref);
 	     	addComponent({id: id,
 	     		      component: component,
-	     		      url: data[id][component]['Mesh ref']});
+	     		      url: meshref
+                             });
 	    } else if (component == 'EC_Avatar') {
 		//console.log('AVATAR');
 		addComponent({id: id,
