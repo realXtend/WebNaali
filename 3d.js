@@ -42,7 +42,7 @@ function initGraffa() {
     var static_scene = new GLGE.Collada();
     if (url_to_static != "") {
         static_scene.setDocument(url_to_static);
-        static_scene.docURL = "/abc/";
+        static_scene.docURL = asset_baseurl;
         static_scene.setRot(0, 0, 0);
         scene.addCollada(static_scene);
     }
@@ -91,7 +91,7 @@ function render() {
 
     now=parseInt(new Date().getTime());
     frameratebuffer = Math.round(((frameratebuffer * 9) + 1000/ (now - lasttime)) / 10);
-    //document.getElementById("fps").innerHTML = "FPS: " + frameratebuffer+ " #obj: " + scene.getObjects().length;
+    document.getElementById("fps").innerHTML = "FPS: " + frameratebuffer+ " #obj: " + scene.getObjects().length;
 
     //document.getElementById("info").innerHTML="Camera:" + camera.getLocX() +", " + camera.getLocY() + ", " + camera.getLocZ() + " : " + camera.getRotX() + ", " + camera.getRotY() + ", " + camera.getRotZ();
 
