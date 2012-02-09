@@ -91,10 +91,12 @@ function render() {
 
     now=parseInt(new Date().getTime());
     frameratebuffer = Math.round(((frameratebuffer * 9) + 1000/ (now - lasttime)) / 10);
-    document.getElementById("fps").innerHTML = "FPS: " + frameratebuffer+ " #obj: " + scene.getObjects().length;
+    var fpsdisplay = document.getElementById("fps");
+    if (fpsdisplay) {
+        fpsdisplay.innerHTML = "FPS: " + frameratebuffer+ " #obj: " + scene.getObjects().length;
+    }
 
     //document.getElementById("info").innerHTML="Camera:" + camera.getLocX() +", " + camera.getLocY() + ", " + camera.getLocZ() + " : " + camera.getRotX() + ", " + camera.getRotY() + ", " + camera.getRotZ();
-
 
     lasttime = now;
 }
